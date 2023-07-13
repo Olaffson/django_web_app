@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - ./merchex:/app/merchex
+    command: bash -c "python django_web_app/manage.py makemigration && python django_web_app/manage.py migrate && python django_web_app/manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: python:3
+    volumes:
+      - ./merchex/db.sqlite3:/app/merchex/db.sqlite3
+    command: tail -f /dev/null
+    restart: always
+
+# docker-compose up -d
+# docker-compose down
