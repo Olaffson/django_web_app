@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - ./merchex:/app/merchex
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+    ports:
+      - 8000:8000
+    restart: always
+
+# docker compose up -d
+# docker compose down
